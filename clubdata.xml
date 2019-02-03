@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<extension type="component" version="3.3.0" method="upgrade">
+    <name>com_clubdata</name>
+    <version>0.3.1</version>
+    <creationDate>2019-01-27</creationDate>
+    <author>Foeke Roukema</author>
+    <authorEmail>webmaster@bruseboys.nl</authorEmail>
+    <authorUrl>http://www.bruseboys.nl</authorUrl>
+    <copyright>Copyright (C) 2017-19 vv Bruse Boys. All rights reserved.</copyright>
+    <license>http://www.gnu.org/licenses/gpl-2.0.html GNU/GPL</license>
+    <description>COM_CLUBDATA_DESCRIPTION</description>
+    <scriptfile>install.php</scriptfile>
+    <files folder="site">
+        <filename>index.html</filename>
+        <filename>clubdata.php</filename>
+		<filename>controller.php</filename>
+		<filename>router.php</filename>
+		<filename>sportlink.php</filename>
+		<folder>controllers</folder>
+		<folder>views</folder>
+		<folder>models</folder>
+		<folder>language</folder>
+    </files>
+    <languages>
+		<language tag="en-GB">site/language/en-GB/en-GB.com_clubdata.ini</language>
+		<language tag="nl-NL">site/language/nl-NL/nl-NL.com_clubdata.ini</language>
+    </languages>
+    <media folder="media" destination="com_clubdata">
+    	<folder>css</folder>
+    	<folder>js</folder>
+    </media>
+    <administration>
+		<menu link='index.php?option=com_clubdata'>COM_CLUBDATA</menu>
+		<files folder="admin">
+			<filename>index.html</filename>
+			<filename>clubdata.xml</filename>
+			<filename>clubdata.php</filename>
+			<filename>controller.php</filename>
+			<filename>config.xml</filename>
+			<folder>vendor</folder>
+			<folder>models</folder>
+			<folder>views</folder>
+			<folder>language</folder>
+	    </files>
+		<languages>
+			<language tag="en-GB">admin/language/en-GB/en-GB.com_clubdata.sys.ini</language>
+			<language tag="en-GB">admin/language/en-GB/en-GB.com_clubdata.ini</language>
+			<language tag="nl-NL">admin/language/nl-NL/nl-NL.com_clubdata.sys.ini</language>
+			<language tag="nl-NL">admin/language/nl-NL/nl-NL.com_clubdata.ini</language>
+		</languages>
+    </administration>
+</extension>

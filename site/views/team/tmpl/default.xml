@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<metadata>
+	<layout title="COM_CLUBDATA_TEAM_VIEW_DEFAULT_TITLE">
+		<message>COM_CLUBDATA_TEAM_VIEW_DEFAULT_DESC</message>
+	</layout>
+	<fields name="request"
+			addfieldpath="/administrator/components/com_clubdata/models/fields"
+	>
+		<fieldset name="request">
+			<field
+					name="teamcode"
+					type="ClubDataTeamlist"
+					label="COM_CLUBDATA_TEAMVIEW_FIELD_TEAMSELECT_LABEL"
+					description="COM_CLUBDATA_TEAMVIEW_FIELD_TEAMSELECT_DESC"
+					required="true"
+					default=""
+					onchange="	
+						jQuery(function($){
+							var $select = $('#jform_request_league');
+						    var ogHTML = $select.data('originalHTML');
+						    if (ogHTML == undefined) {
+							    $select.data('originalHTML', $select.html());
+							} else {
+							    $select.html(ogHTML);
+							}
+							
+							var whattofind = 'option:not(:contains(\''+  $('#jform_request_teamcode option:selected').text() + '\'))';
+						    var $optionsToRemove = $select.find(whattofind);
+						    whattofind = 'option[value!=\'\']';
+						    $optionsToRemove.remove('option[value!=\'\']');
+						    $select.trigger('liszt:updated');
+						}) (jQuery);"
+			>
+				<option value="">COM_CLUBDATA_TEAMVIEW_FIELD_TEAMSELECT_DEFAULT_OPTION</option>
+			</field>
+			<field
+					name="league"
+					type="ClubDataLeaguelist"
+					label="COM_CLUBDATA_TEAMVIEW_FIELD_LEAGUESELECT_LABEL"
+					description="COM_CLUBDATA_TEAMVIEW_FIELD_LEAGUESELECT_DESC"
+			>
+				<option value="">COM_CLUBDATA_TEAMVIEW_FIELD_LEAGUESELECT_DEFAULT_OPTION</option>
+			</field>
+		</fieldset>
+	</fields>
+</metadata>

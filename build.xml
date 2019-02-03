@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?xml-model xlink:href="./vendor/phing/phing/etc/phing-grammar.rng"
+            type="application/xml"
+            schematypens="http://relaxng.org/ns/structure/1.0" ?>
+<project name="com_clubdata release creation" default="main" basedir=".">
+	<property name="srcdir_dev_base"			value="../../bruseboys36" override="true" />
+	<property name="srcdir_admin"  				value="${srcdir_dev_base}/administrator/components/com_clubdata" override="true" />
+	<property name="srcdir_adminlang_nl"		value="${srcdir_dev_base}/administrator/language/nl-NL" override="true" />
+	<property name="srcdir_adminlang_en"		value="${srcdir_dev_base}/administrator/language/en-GB" override="true" />
+	<property name="srcdir_site"	  			value="${srcdir_dev_base}/components/com_clubdata" override="true" />
+	<property name="srcdir_sitelang_nl" 		value="${srcdir_dev_base}/language/nl-NL" override="true" />
+	<property name="srcdir_sitelang_en" 		value="${srcdir_dev_base}/language/en-GB" override="true" />
+	<property name="srcdir_media"  				value="${srcdir_dev_base}/media/com_clubdata" override="true" />
+
+	<property name="destdir_comclubdata"		value="." override="true" />
+	<property name="destdir_admin"				value="${destdir_comclubdata}/admin" override="true" />
+	<property name="destdir_adminlang_nl"		value="${destdir_admin}/language/nl-NL" override="true" />
+	<property name="destdir_adminlang_en"		value="${destdir_admin}/language/en-GB" override="true" />
+	<property name="destdir_site"				value="${destdir_comclubdata}/site" override="true" />
+	<property name="destdir_sitelang_nl"		value="${destdir_site}/language/nl-NL" override="true" />
+	<property name="destdir_sitelang_en"		value="${destdir_site}/language/en-GB" override="true" />
+	<property name="destdir_media"				value="${destdir_comclubdata}/media" override="true" />
+	<property name="destdir_output"				value="${destdir_comclubdata}/out" override="true" />
+
+	<xmlproperty file="${srcdir_admin}/clubdata.xml"/>
+    <php function="str_replace" returnProperty="extensionversion">
+		<param value="." />
+    	<param value="_" />
+    	<param value="${extension.version}" />
+	</php>
+	
+    <!-- Fileset for dev/admin files -->
+    <fileset dir="${srcdir_admin}" id="adminfiles">
+        <include name="**" />
+        <exclude name="vendor/**" />
+    </fileset>
+
+    <!-- Fileset for dev/admin/language files -->
+    <fileset dir="${srcdir_adminlang_nl}" id="adminlangfiles_nl">
+        <include name="*.com_clubdata*.ini" />
+    </fileset>
+    <fileset dir="${srcdir_adminlang_en}" id="adminlangfiles_en">
+        <include name="*.com_clubdata*.ini" />
+    </fileset>
+
+    <!-- Fileset for dev/site files -->
+    <fileset dir="${srcdir_site}" id="sitefiles">
+        <include name="**" />
+    </fileset>
+
+    <!-- Fileset for dev/site/language files -->
+    <fileset dir="${srcdir_sitelang_nl}" id="sitelangfiles_nl">
+        <include name="*.com_clubdata.ini" />
+	</fileset>
+    <fileset dir="${srcdir_sitelang_en}" id="sitelangfiles_en">
+        <include name="*.com_clubdata.ini" />
+	</fileset>
+
+    <!-- Fileset for dev/media files -->
+    <fileset dir="${srcdir_media}" id="mediafiles">
+        <include name="**" />
+    </fileset>
+
+    <fileset dir="${destdir_comclubdata}" id="mainfiles">
+		<include name="**" />
+        <exclude name="build*.xml" />
+       	<exclude name="composer.*"/>		    	
+       	<exclude name="*.zip"/>		    	
+       	<exclude name=".*/**"/>		    	
+       	<exclude name="src/**"/>		    	
+       	<exclude name="out/**"/>
+       	<exclude name="admin/vendor/bruseboys/sportlinkclubdata/.**"/>
+       	<exclude name="admin/vendor/bruseboys/sportlinkclubdata/test/**"/>
+       	<exclude name="admin/vendor/bruseboys/sportlinkclubdata/vendor/**"/>    	
+    </fileset>
+	
+    <!-- ============================================  -->
+    <!-- Copy files to target                          -->
+    <!-- ============================================  -->
+    <target name="copy" description="Creates com_clubdata release package">
+		<echo message="Running build.xml. Copying files from dev to release package..." />
+    	<copy file="${srcdir_admin}/clubdata.xml" todir="${destdir_comclubdata}" />
+    	<copy todir="${destdir_admin}">
+            <fileset refid="adminfiles" />
+        </copy>
+    	<copy todir="${destdir_adminlang_nl}">
+            <fileset refid="adminlangfiles_nl" />
+        </copy>
+    	<copy todir="${destdir_adminlang_en}">
+            <fileset refid="adminlangfiles_en" />
+        </copy>
+    	<copy todir="${destdir_site}">
+            <fileset refid="sitefiles" />
+        </copy>
+    	<copy todir="${destdir_sitelang_nl}">
+            <fileset refid="sitelangfiles_nl" />
+        </copy>
+    	<copy todir="${destdir_sitelang_en}">
+            <fileset refid="sitelangfiles_en" />
+        </copy>
+    	<copy todir="${destdir_media}">
+            <fileset refid="mediafiles" />
+        </copy>
+     </target>
+    	
+	<!-- ============================================  -->
+    <!-- Zip installation file                         -->
+    <!-- ============================================  -->
+	<target name="archive" description="Create zipfile" depends="copy, composer">
+		<echo message="Creating installation zipfile..." />
+		<delete file="${destdir_output}/com_clubdata_v${extensionversion}.zip" />
+    	<zip destfile="${destdir_output}/com_clubdata_v${extensionversion}.zip">
+            <fileset refid="mainfiles" />
+		</zip>
+    </target>
+
+	<!-- ============================================  -->
+    <!-- Composer updater		                       -->
+    <!-- ============================================  -->
+	<target name="composer" description="Installing dependencies">
+		<echo message="Updating dependencies with composer..." />
+		<composer command="update">
+			<arg value="--no-dev"/>
+		</composer>
+	</target>
+	
+	<!-- ============================================  -->
+    <!-- Main					                       -->
+    <!-- ============================================  -->
+	<target name="main" description="main script" depends="archive"></target>
+	
+</project>

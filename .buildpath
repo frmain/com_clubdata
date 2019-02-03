@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<buildpath>
+	<buildpathentry kind="src" path="admin/vendor/guzzlehttp/promises/src">
+		<attributes>
+			<attribute name="composer" value="admin/vendor"/>
+		</attributes>
+	</buildpathentry>
+	<buildpathentry kind="src" path="admin/vendor/psr/http-message/src">
+		<attributes>
+			<attribute name="composer" value="admin/vendor"/>
+		</attributes>
+	</buildpathentry>
+	<buildpathentry kind="src" path="admin/vendor/composer">
+		<attributes>
+			<attribute name="composer" value="admin/vendor"/>
+		</attributes>
+	</buildpathentry>
+	<buildpathentry kind="con" path="org.eclipse.php.core.LANGUAGE"/>
+	<buildpathentry kind="src" path="admin/vendor/netresearch/jsonmapper/src">
+		<attributes>
+			<attribute name="composer" value="admin/vendor"/>
+		</attributes>
+	</buildpathentry>
+	<buildpathentry kind="src" path="admin/vendor/guzzlehttp/psr7/src">
+		<attributes>
+			<attribute name="composer" value="admin/vendor"/>
+		</attributes>
+	</buildpathentry>
+	<buildpathentry kind="src" path="admin/vendor/guzzlehttp/guzzle/src">
+		<attributes>
+			<attribute name="composer" value="admin/vendor"/>
+		</attributes>
+	</buildpathentry>
+	<buildpathentry kind="src" path="src">
+		<attributes>
+			<attribute name="composer" value="source"/>
+		</attributes>
+	</buildpathentry>
+	<buildpathentry kind="src" path="admin/vendor/bruseboys/sportlinkclubdata/src">
+		<attributes>
+			<attribute name="composer" value="admin/vendor"/>
+		</attributes>
+	</buildpathentry>
+</buildpath>

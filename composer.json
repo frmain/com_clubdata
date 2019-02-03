@@ -1,0 +1,28 @@
+{
+	"config" : {
+		"secure-http" : false,
+		"vendor-dir" : "admin/vendor"
+	},
+	"autoload" : {
+		"psr-4" : {
+			"Bruseboys\\Com_clubdata\\" : "src"
+		}
+	},
+	"name" : "bruseboys/com_clubdata",
+	"description" : "joomla component com_clubdata",
+	"version" : "0.1.1",
+	"license" : "MIT",
+	"authors" : [{
+			"name" : "Foeke Roukema",
+			"email" : "webmaster@bruseboys.nl",
+			"homepage" : "http://www.bruseboys.nl",
+			"role" : "developer"
+		}
+	],
+	"require" : {
+		"bruseboys/sportlinkclubdata" : "*"
+	},
+	"require-dev" : {
+		"phing/phing" : "~2"
+	}
+}
