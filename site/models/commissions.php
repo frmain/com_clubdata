@@ -43,6 +43,7 @@ class ClubDataModelCommissions extends ClubDataModelBase
 	    if (!isset($this->commissions))
 	    {
             $this->commissions = $this->sportlink->getCommissions();
+            // shuffle($this->commissions);
 	    }
 	    return $this->commissions;
 	}

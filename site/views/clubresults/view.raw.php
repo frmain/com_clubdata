@@ -39,7 +39,10 @@ class ClubDataViewClubResults extends JViewLegacy
     	
     	!empty($this->get('Warning'))?? $this->warning[] = $this->get('Warning');
     	$this->warningmessage = empty($this->warning)?"":implode(", <br/>", $this->warning);
-	
+    	
+    	$app = JFactory::getApplication();
+    	$app->setHeader('Access-Control-Allow-Origin', '*');
+    	
 		parent::display($tpl);
 	}
 	

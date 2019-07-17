@@ -51,7 +51,7 @@ class ClubDataViewClubSchedule extends JViewLegacy
 		$this->warningmessage = empty($this->warning)?"":implode(", <br/>", $this->warning);
 		
 		$app = JFactory::getApplication();
-		$app->setHeader('Access-Control-Allow-Origin:', '*');
+		$app->setHeader('Access-Control-Allow-Origin', '*');
 		
 		parent::display($tpl);
 	}

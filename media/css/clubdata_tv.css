@@ -1,0 +1,451 @@
+/**
+ * @package     Joomla.Site
+ * @subpackage  com_clubdata
+ *
+ * @copyright   Copyright (C) 2017 Bruse Boys
+ * @license     GNU General Public License version 2 or later; see LICENSE.txt
+ */
+
+
+.clubdatateamdata, .clubdataleagues, .clubdataplayers, .clubdatastaff, .clubdataranking, .clubdataschedule, .clubdataresults, .clubdatacommissions {
+}
+
+
+@media screen and (max-width:767px) {
+	
+	.clubdatateam .col-md-6 {
+		margin: 0 -5px;
+	}
+	
+	.clubdata-ranking { 
+		.clubdata-ranking-won,
+		.clubdata-ranking-drawn,
+		.clubdata-ranking-lost {
+			display: none;
+		}
+	}
+
+	.clubdata-player .clubdata-player-role {
+		display: none;
+	}
+	
+	
+}
+
+.clubdatateam .col-md-6 {
+	padding: 0 5px;
+	overflow: hidden;
+}
+
+.clubdata-results, .clubdata-schedule, .clubdata-ranking, .clubdata-players, .clubdata-leagues, .clubdata-clubschedule, 
+.clubdata-clubresults, .clubdata-clubcancellations, .clubdata-commission-members {
+	display: table;
+	width: 99%;
+	border-collapse: collapse;
+}
+
+.clubdata-match, .clubdata-rank, .clubdata-player, .clubdata-league {
+	display: table-row;
+	height: 30px;
+}
+
+.clubdata-header {
+	display: table-header-group; 
+	height: 30px;
+	font-weight: bold;
+	font-variant: small-caps;
+}
+
+.clubdata-header div {
+	display: table-cell;
+	/* border: 1px solid blue; */
+}
+
+.clubdata-footer {
+	display: table-footer-group;
+}
+
+.clubdata-league:hover {
+   	color: blue;
+	cursor: pointer;
+}
+
+.clubdata-nomatches {
+	margin: 15px 0;
+}
+	
+.clubdata-favourite {
+	border-style: dotted; 
+	border-color: blue;
+	border-radius: 4px;
+	border-width: 2px;	
+}
+
+/*  TEAM */
+
+.clubdata-team-img {
+	width: 100%;
+	height: auto;	
+}
+
+.clubdata-other-team {
+	float: right;
+	clear: both;
+}
+
+.clubdata-teamdata:after {
+  content: "";
+  clear: both;
+  display: table;
+}
+
+/*  RANKING */
+
+.clubdata-rank * {
+	display: table-cell;
+}
+
+.clubdata-ranking-position,
+.clubdata-ranking-total,
+.clubdata-ranking-won,
+.clubdata-ranking-drawn,
+.clubdata-ranking-lost,
+.clubdata-ranking-points,
+.clubdata-ranking-score, 
+.clubdata-ranking-goalsdiff, 
+.clubdata-ranking-points-deducted{
+	display: table-cell;
+	min-width: 14px;
+	text-align: right;
+	padding: 1px 4px;
+}
+
+.clubdata-ranking-points {
+	font-weight: bold;
+}
+
+.clubdata-ranking-points-deducted{
+	font-weight: bold;
+	color: red;
+}
+
+.clubdata-ranking-points-deducted:before { 
+   	content: "(";
+}
+
+.clubdata-ranking-points-deducted:after { 
+   	content: ")";
+}
+
+
+/*  SCHEDULE, RESULTS */
+
+.clubdata-infotext {
+	font-size: smaller;
+	padding: 0 0 0 10px;
+}
+
+.tab-pane  {
+	overflow: auto;	
+}
+
+.clubdata-match div {
+	display: table-cell;
+	/* border: 1px solid blue; */
+}
+
+.clubdata-match-date,
+.clubdata-match-time,
+.clubdata-match-title,
+.clubdata-match-result {
+	min-width: 14px;
+	padding: 1px 4px;
+}
+
+.colspan{
+	max-width:1px; 
+	overflow:visible;
+	white-space: nowrap;
+}
+
+.clubdata-match-name, .clubdata-match-home, .clubdata-match-away {
+}
+
+.clubdata-match-time {
+	color: blue;
+}
+
+.clubdata-match-home {
+	color: purple;	
+}
+
+.clubdata-match-away {
+	color: brown;	
+}
+
+.clubdata-match-field {
+	color: darkgreen;
+}
+
+.clubdata-match-referee {
+	color: black;	
+}
+
+.clubdata-match-state {
+	color: blue;
+}
+
+.clubdata-match .clubdata-match-field {
+	text-decoration: underline;
+}
+
+.clubdata-header div{
+	/* text-align: left; */
+}
+
+.clubdata-match-dressroom span {
+  background: #cccccc;
+  border-radius: 0.8em;
+  -moz-border-radius: 0.8em;
+  -webkit-border-radius: 0.8em;
+  display: inline-block;
+  font-weight: bold;
+  line-height: 1.6em;
+  margin-right: 5px;
+  text-align: center;
+  width: 1.6em; 
+}
+
+.clubdata-match-time, .clubdata-match-dressroom, .clubdata-match-field, .clubdata-match-state {
+	text-align: center;	
+}
+
+.clubdata-match-dressroom {
+	/* background-image: url("../images/changingrooms-icon.jpg"); */
+	background-repeat: no-repeat;
+	background-size: 20px;
+	background-position: left; 
+	border-right: 1px solid purple;
+	border-left: 1px solid purple;
+	margin: 0 5px;	
+}
+
+.clubdata-match-cancelled {
+	color: red;
+	text-decoration-line: line-through;
+}
+
+.clubdata-match-cancelled .clubdata-match-state {
+	display: inline-block;
+	text-decoration: initial;
+	color: red;
+	border-radius: 5px;
+	border: 1px solid red;
+	background-color: white;
+	margin-left: 8px;
+	padding: 0 5px;	
+}
+
+.clubdata-schedule .popover {
+    max-width: 600px;
+    width: auto;
+}
+
+.clubdata-clubcancellations .clubdata-match-cancelled {
+	text-decoration-line: initial; 
+}
+
+.clubdata-match-cancellation {
+	display: inline-block;
+	text-decoration: initial;
+	color: red;
+	border-radius: 5px;
+	border: 1px solid red;
+	background-color: white;
+	margin-left: 8px;
+	padding: 0 5px;	
+}
+
+
+
+/*  PLAYERS */
+
+.clubdata-player div {
+	display: table-cell;
+}
+
+.clubdata-player-photo,
+.clubdata-player-name,
+.clubdata-player-function,
+.clubdata-player-role {
+	min-width: 14px;
+	padding: 1px 4px;
+}
+
+.clubdata-player-img {
+	width: 60px;
+	height: auto;	
+}
+
+.clubdata-player-img-popover {
+	width: 200px;
+	height: auto;	
+}
+
+/*  LEAGUES */
+
+.clubdata-league div {
+	display: table-cell;
+}
+
+.clubdata-league-title,
+.clubdata-league-class {
+	min-width: 14px;
+	padding: 1px 4px;
+}
+
+.clubdata-league-select {
+	font-weight: bold;
+}
+
+.clubdata-leagues .clubdata-league-selected {
+	background-color: #f9ecf9;
+}
+
+.clubdata-loader {
+	border: 4px solid #f3f3f3;
+	border-radius: 50%;
+	border-top: 4px solid purple;
+	/* border-right: 4px solid white; */
+	border-bottom: 4px solid purple;
+	/* border-left: 4px solid white; */
+	width: 30px;
+	height: 30px;
+	-webkit-animation: spin 2s linear infinite;
+	animation: spin 2s linear infinite;
+	margin: auto;
+}
+
+.clubdata-loader-wrapper {
+	display: none;
+	padding: 30px;
+}	
+
+@-webkit-keyframes spin {
+	0% { -webkit-transform: rotate(0deg); }
+	100% { -webkit-transform: rotate(360deg); }
+}
+
+@keyframes spin {
+	0% { transform: rotate(0deg); }
+	100% { transform: rotate(360deg); }
+}
+
+.clubdata-changescope .btn {
+	margin: 10px 0;
+}
+
+/*  COMMISSION */
+
+@media (min-width: 768px) {
+	.clubdata-commission-row {
+		display: flex;
+		justify-content: space-between;
+		flex-wrap: wrap;
+	}
+}
+
+.clubdata-commission-row {
+}
+
+/*  ORGANISATION MEMBERS */
+
+.clubdata-commission {
+	padding: 20px;
+	box-sizing: border-box;
+	flex-basis: 49%;
+	margin: 10px 0;	
+	border-radius: 2%;
+}
+
+.clubdata-description, .clubdata-comment {
+	padding: 4px 0;
+}
+
+.clubdata-commission-img {
+	width: 100%;
+	height: auto;
+	border-radius: 5%;
+	padding: 10px 50px;
+/*
+	-webkit-filter: grayscale(50%);
+	filter: grayscale(50%);	
+*/
+}
+
+/*
+.clubdata-commission:nth-child(1) {background-color: #c0dbe2;}
+.clubdata-commission:nth-child(2) {background-color: #ccb9da;}
+.clubdata-commission:nth-child(3) {background-color: #cdf1c3;}
+*/
+
+.clubdata-commission .clubdata-header {
+	background-color: none;
+}
+
+h3.clubdata-commission-members {
+	font-size: 16px;
+}
+
+.clubdata-member {
+	display: flex;
+	padding: 4px 0;
+}
+
+.clubdata-member-cola {
+}
+
+.clubdata-member-colb {
+	flex: 1;
+	display: flex;
+	flex-direction: column;
+}
+
+.clubdata-member-img {
+	border-radius: 5%;
+}
+
+.clubdata-member-photo,
+.clubdata-member-name,
+.clubdata-member-description,
+.clubdata-member-since,
+.clubdata-member-role {
+	min-width: 14px;
+	padding: 1px 4px;
+}
+
+.clubdata-member-name {
+	font-weight: bold;	
+}
+
+.clubdata-member-role {
+	font-style: italic;
+}
+	
+.clubdata-member-name,
+.clubdata-member-role,
+.clubdata-member-description,
+.clubdata-member-since {
+	flex: 1;
+}
+
+.clubdata-member-img {
+	width: 60px;
+	height: auto;	
+}
+
+.clubdata-member-img-popover {
+	width: 200px;
+	height: auto;	
+}
+
