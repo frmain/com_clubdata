@@ -10,7 +10,7 @@
 // No direct access to this file
 defined('_JEXEC') or die('Restricted access');
 
-// todo: in params
+// @todo: in params
 
 function getFirstNumberOffset($string){
     preg_match('/^\D*(?=\d*)/', $string, $m);
@@ -53,16 +53,16 @@ else {
     ?>
     <div id="clubdata-data">
         <div id="clubdata-clubschedule" class="clubdata-clubschedule"> 
-        	<div class="clubdata-match clubdata-header">
-        		<div class="clubdata-match-time"><img src="<?php echo Juri::root() . 'media/com_clubdata/images/clock-icon.png'?>" alt="" /></div>
-           		<div class="clubdata-match-home"><img src="<?php echo Juri::root() . 'media/com_clubdata/images/home2-icon.png'?>" alt="" /></div>
-           		<div class="clubdata-match-dressroom clubdata-match-home"><img src="<?php echo Juri::root() . 'media/com_clubdata/images/changingrooms-home-icon.png'?>" alt="" /></div>
-           		<div class="clubdata-match-away"><img src="<?php echo Juri::root() . 'media/com_clubdata/images/away-icon.png'?>" alt="" /></div>
-           		<div class="clubdata-match-dressroom clubdata-match-away"><img src="<?php echo Juri::root() . 'media/com_clubdata/images/changingrooms-away-icon.png'?>" alt="" /></div>
-           		<div class="clubdata-match-field"><img src="<?php echo Juri::root() . 'media/com_clubdata/images/field-icon.png'?>" alt="" /></div>
-           		<div class="clubdata-match-referee"><img src="<?php echo Juri::root() . 'media/com_clubdata/images/referee-icon.png'?>" alt="" /></div>
-           		<div class="clubdata-match-dressroom clubdata-match-referee"><img src="<?php echo Juri::root() . 'media/com_clubdata/images/changingrooms-referee-icon.png'?>" alt="" /></div>
-           		<div class="clubdata-match-state"><img src="<?php echo Juri::root() . 'media/com_clubdata/images/state-icon.png'?>" alt="" /></div>
+        	<div class="clubdata-match clubdata-header-imgrow">
+        		<div class="clubdata-match-time"><img class="clubdata-icon" src="<?php echo Juri::root() . 'media/com_clubdata/images/clock-icon.png'?>" alt="" /></div>
+           		<div class="clubdata-match-home"><img class="clubdata-icon" src="<?php echo Juri::root() . 'media/com_clubdata/images/home2-icon.png'?>" alt="" /></div>
+           		<div class="clubdata-match-dressroom clubdata-match-home"><img class="clubdata-icon" src="<?php echo Juri::root() . 'media/com_clubdata/images/changingrooms-home-icon.png'?>" alt="" /></div>
+           		<div class="clubdata-match-away"><img class="clubdata-icon" src="<?php echo Juri::root() . 'media/com_clubdata/images/away-icon.png'?>" alt="" /></div>
+           		<div class="clubdata-match-dressroom clubdata-match-away"><img class="clubdata-icon" src="<?php echo Juri::root() . 'media/com_clubdata/images/changingrooms-away-icon.png'?>" alt="" /></div>
+           		<div class="clubdata-match-field"><img class="clubdata-icon" src="<?php echo Juri::root() . 'media/com_clubdata/images/field-icon.png'?>" alt="" /></div>
+           		<div class="clubdata-match-referee"><img class="clubdata-icon" src="<?php echo Juri::root() . 'media/com_clubdata/images/referee-icon.png'?>" alt="" /></div>
+           		<div class="clubdata-match-dressroom clubdata-match-referee"><img class="clubdata-icon" src="<?php echo Juri::root() . 'media/com_clubdata/images/changingrooms-referee-icon.png'?>" alt="" /></div>
+           		<div class="clubdata-match-state"><img class="clubdata-icon" src="<?php echo Juri::root() . 'media/com_clubdata/images/state-icon.png'?>" alt="" /></div>
            	</div>
            	<div class="clubdata-match clubdata-header">
            		<div class="clubdata-match-time"><?php echo JText::_('COM_CLUBDATA_MATCH_TIME'); ?></div>
@@ -86,35 +86,40 @@ else {
         		<?php 
         	    $lastdate = $match->datum;
         	    
-    	    } ?>
-            	<div class="clubdata-match <?php if ($match->getStatuscode() == 1) { echo 'clubdata-match-cancelled'; } ?>">
-    				<div class="clubdata-match-time"><?php echo $match->aanvangstijd ?></div>
-            		<div class="clubdata-match-home"><?php echo $match->thuisteam ?></div>
-            		<div class="clubdata-match-dressroom clubdata-match-home"><span><?php $room=stripToFirstNumberOffset($match->kleedkamerthuisteam); echo (!empty($room) ? JText::_('COM_CLUBDATA_MATCH_ROOM_ABBR') . $room : ''); ?></span></div>
-            		<div class="clubdata-match-away"><?php echo $match->uitteam ?></div>
-            		<div class="clubdata-match-dressroom clubdata-match-away"><span><?php $room=stripToFirstNumberOffset($match->kleedkameruitteam); echo (!empty($room) ? JText::_('COM_CLUBDATA_MATCH_ROOM_ABBR') . $room : ''); ?></span></div>
-            		<div class="clubdata-match-field"><?php $field=stripToFirstNumberOffset($match->veld); echo (!empty($field) ? JText::_('COM_CLUBDATA_MATCH_FIELD_ABBR') . $field : ''); ?></div>
-            		<div class="clubdata-match-referee"><?php echo $match->scheidsrechter ?></div>
-            		<div class="clubdata-match-dressroom clubdata-match-referee"><span><?php $room=stripToFirstNumberOffset($match->kleedkamerscheidsrechter); echo (!empty($room) ? JText::_('COM_CLUBDATA_MATCH_ROOM_ABBR') . $room : ''); ?></span></div>
-            		<?php 
-/*
- *             		$interval = $match->wedstrijddatum->diff(new DateTime());
-            		if ($interval->d < 1) 
-            		    // $statustext =  $interval->format(JText::_("COM_CLUBDATA_MATCH_START_IN"));
-            		else {
+    	    }
+/*          $interval = $match->wedstrijddatum->diff(new DateTime());
+            if ($interval->d < 1) 
+                // $statustext =  $interval->format(JText::_("COM_CLUBDATA_MATCH_START_IN"));
+            else {
 */
-                    switch ($match->getStatuscode()) {
-            		      case 0:
-            		          $statustext = JText::_("COM_CLUBDATA_MATCH_SCHEDULED"); break;
-            		      case 1:
-            		          $statustext = JText::_("COM_CLUBDATA_MATCH_CANCELLED"); break;
-            		      default:
-            		          $statustext = "";
-            		}
-            		/* $minutesToAdd = $match->duur +15; // add break time */
-            		$minutesToAdd = $match->getMatch()->duur +15; // add break time
-            		$endMatch = (clone $match->wedstrijddatum)->modify("+{$minutesToAdd} minutes");
-            		?>
+            switch ($match->getStatuscode()) {
+    		      case 0:
+    		          $statustext = JText::_("COM_CLUBDATA_MATCH_SCHEDULED"); break;
+    		      case 1:
+    		          $statustext = JText::_("COM_CLUBDATA_MATCH_CANCELLED"); break;
+    		      default:
+    		          $statustext = "";
+    		}
+    		$minutesToAdd = $match->getMatch()->duur +15; // add break time
+    		$endMatch = (clone $match->wedstrijddatum)->modify("+{$minutesToAdd} minutes");
+
+    		/* determine the main referee to show */
+    		// check if a match official has been appointed as main referee
+    		$ref_funcs_filter = array("Scheidsrechter", "Spelbegeleider", "Clubscheidsrechter");
+      		foreach ($match->getMatch()->getOfficials()->getOfficials() as $official) {
+      		    if (in_array($official->officialomschrijving, $ref_funcs_filter))
+      		        $referee = $official->officialnaam;
+       		}
+    		?>
+            	<div class="clubdata-match <?php if ($match->getStatuscode() == 1) { echo 'clubdata-match-cancelled'; } ?>">
+    				<div class="clubdata-match-time"><span><?php echo $match->aanvangstijd ?></span></div>
+            		<div class="clubdata-match-home"><span><?php echo $match->thuisteam ?></span></div>
+            		<div class="clubdata-match-dressroom"><span><?php $room=stripToFirstNumberOffset($match->kleedkamerthuisteam); echo (!empty($room) ? JText::_('COM_CLUBDATA_MATCH_ROOM_ABBR') . $room : ''); ?></span></div>
+            		<div class="clubdata-match-away"><span><?php echo $match->uitteam ?></span></div>
+            		<div class="clubdata-match-dressroom"><span><?php $room=stripToFirstNumberOffset($match->kleedkameruitteam); echo (!empty($room) ? JText::_('COM_CLUBDATA_MATCH_ROOM_ABBR') . $room : ''); ?></span></div>
+            		<div class="clubdata-match-field"><span><?php $field=stripToFirstNumberOffset($match->veld); echo (!empty($field) ? JText::_('COM_CLUBDATA_MATCH_FIELD_ABBR') . $field : ''); ?></span></div>
+            		<div class="clubdata-match-referee"><span <?php if (strtoupper($referee)==strtoupper(JText::_("COM_CLUBDATA_PRIVATE"))) echo "class=clubdata-private" ?>><?php echo $referee ?></span></div>
+            		<div class="clubdata-match-dressroom clubdata-match-referee"><span><?php $room=stripToFirstNumberOffset($match->kleedkamerscheidsrechter); echo (!empty($room) ? JText::_('COM_CLUBDATA_MATCH_ROOM_ABBR_REF') . $room : ''); ?></span></div>
             		<div class="clubdata-match-state" data-matchdate="<?php echo $match->wedstrijddatum->format(DATE_RFC2822) ?>" 
             		 data-endmatchdate="<?php echo $endMatch->format(DATE_RFC2822) ?>" data-statuscode="<?php echo $match->getStatuscode() ?>">
             		 	<?php echo $statustext; ?>

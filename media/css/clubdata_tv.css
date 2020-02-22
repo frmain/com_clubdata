@@ -2,34 +2,101 @@
  * @package     Joomla.Site
  * @subpackage  com_clubdata
  *
- * @copyright   Copyright (C) 2017 Bruse Boys
+ * @copyright   Copyright (C) 2019 Bruse Boys
  * @license     GNU General Public License version 2 or later; see LICENSE.txt
  */
 
 
-.clubdatateamdata, .clubdataleagues, .clubdataplayers, .clubdatastaff, .clubdataranking, .clubdataschedule, .clubdataresults, .clubdatacommissions {
+/*  GENERAL */
+
+@import url(http://fonts.googleapis.com/css?family=Lato:300,400,700|Satisfy);
+@import url('https://fonts.googleapis.com/css?family=Indie+Flower&display=swap');
+@import url('https://fonts.googleapis.com/css?family=Indie+Flower|Permanent+Marker&display=swap');
+@import url('https://fonts.googleapis.com/css?family=Indie+Flower|Lexend+Deca|Permanent+Marker&display=swap');
+body {
+	/* 
+	font-family: 'Satisfy', serif; 
+	font-family: 'Indie Flower', cursive;
+	*/
+	font-family: 'Verdana';
+	color: purple;
+	background-color: transparent; 
 }
 
+h3 {
+	text-align: center;
+}
 
-@media screen and (max-width:767px) {
-	
-	.clubdatateam .col-md-6 {
-		margin: 0 -5px;
-	}
-	
-	.clubdata-ranking { 
-		.clubdata-ranking-won,
-		.clubdata-ranking-drawn,
-		.clubdata-ranking-lost {
-			display: none;
-		}
+#clubdata-title {
+	font-style: italic;
+	font-family: 'Permanent Marker', cursive;
+}
+
+.clubdatateamdata, .clubdataleagues, .clubdataplayers, .clubdatastaff, .clubdataranking, .clubdataschedule, .clubdataresults {
+}
+
+@media screen and (min-width: 1280px) {
+	div {
+    	font-size: 30px;
 	}
 
-	.clubdata-player .clubdata-player-role {
-		display: none;
+	.clubdata-icon, .clubdata-icon-s {
+		height: 40px;
+	}
+
+	.clubdata-clublogo {
+		max-height: 40px; 
+	}
+
+}
+
+@media screen and (min-width: 767px) and (max-width: 1280px) {
+	div {
+		font-size: 18px;
+	}
+
+	.clubdata-icon, .clubdata-icon-s {
+		height: 30px;	
 	}
 	
-	
+	.clubdata-clublogo {
+		max-height: 30px; 
+	}
+
+}
+
+@media screen and (max-width: 767px) {
+	div {
+		font-size: 12px;
+	}
+
+	.clubdata-icon, .clubdata-icon-s {
+		height: 20px;	
+	}
+
+	.clubdata-clublogo {
+		max-height: 20px;
+	}
+
+}
+
+@media screen and (min-height: 720px) {
+	.clubdata-match {
+		height: 60px;
+	}
+
+}
+
+@media screen and (max-height: 720px) {
+	.clubdata-match {
+		height: 40px;
+	}
+
+}
+
+.clubdata-icon-s {
+	padding-right: 15px;
+	vertical-align: middle;
 }
 
 .clubdatateam .col-md-6 {
@@ -37,23 +104,31 @@
 	overflow: hidden;
 }
 
-.clubdata-results, .clubdata-schedule, .clubdata-ranking, .clubdata-players, .clubdata-leagues, .clubdata-clubschedule, 
+.clubdata-private {
+	font-style: italic; 
+}
+
+.clubdata-private:before, .clubdata-private:after {
+   	content: "*";
+}
+
+.clubdata-results, .clubdata-schedule, .clubdata-match-slide, .clubdata-ranking, .clubdata-players, .clubdata-leagues, .clubdata-clubschedule, 
 .clubdata-clubresults, .clubdata-clubcancellations, .clubdata-commission-members {
 	display: table;
 	width: 99%;
 	border-collapse: collapse;
 }
 
-.clubdata-match, .clubdata-rank, .clubdata-player, .clubdata-league {
+.clubdata-match, .clubdata-match-s, .clubdata-rank, .clubdata-player, .clubdata-league {
 	display: table-row;
-	height: 30px;
 }
 
 .clubdata-header {
 	display: table-header-group; 
-	height: 30px;
+	height: 35px;
 	font-weight: bold;
 	font-variant: small-caps;
+	font-family: 'Permanent Marker', cursive;
 }
 
 .clubdata-header div {
@@ -80,6 +155,388 @@
 	border-radius: 4px;
 	border-width: 2px;	
 }
+
+.clubdata-clublogo {
+	margin: 0 10px;
+}
+
+/*  SCHEDULE, RESULTS */
+
+.clubdata-match div, .clubdata-match-s div {
+	display: table-cell;
+}
+
+.clubdata-match-date,
+.clubdata-match-time,
+.clubdata-match-title,
+.clubdata-match-result {
+	min-width: 14px;
+	padding: 1px 4px;
+}
+
+.colspan{
+	max-width:1px; 
+	overflow:visible;
+	white-space: nowrap;
+}
+
+.clubdata-match-name, .clubdata-match-home, .clubdata-match-away {
+}
+
+.clubdata-match-time {
+	color: blue;
+}
+
+.clubdata-match-home, .clubdata-match-dressroom {
+	color: purple;	
+}
+
+.clubdata-match-home span {
+	background:rgba(255,255,255,0.3) ;
+	border-radius: 5px;
+	padding: 0 20px;
+	font-size: 1.0em;
+}
+
+.clubdata-match-away span {
+	background:rgba(120,120,255,0.5) ; 
+	border-radius: 5px;
+	padding: 0 20px;
+	font-size: 1.0em;
+}
+
+.clubdata-match-referee span {
+	background:rgba(255,255,255,0.5) ;
+	border-radius: 5px;
+	padding: 0 20px;
+}
+
+.clubdata-match-away {
+	color: white;	
+}
+
+.clubdata-match-field {
+	color: white;
+}
+
+.clubdata-header .clubdata-match-field {
+	color: white;
+	background-color: green;
+}
+
+.clubdata-header .clubdata-match-dressroom {
+	color: white;
+	background-color: purple;
+}
+
+.clubdata-match-referee {
+	color: black;	
+}
+
+.clubdata-match-state {
+	color: blue;
+}
+
+.clubdata-match .clubdata-match-field {
+}
+
+.clubdata-header-imgrow {
+	border-bottom: 0px;
+}
+
+.clubdata-header {
+	border-bottom: black 1px solid;
+}
+
+.clubdata-match {
+	text-align: center;
+}
+
+
+.clubdata-match-dressroom span {
+  background: #cccccc;
+  border-radius: 0.8em;
+  -moz-border-radius: 0.8em;
+  -webkit-border-radius: 0.8em;
+  display: inline-block;
+  font-weight: bold;
+  line-height: 1.6em;
+  margin-right: 5px;
+  text-align: center;
+  width: 1.6em; 
+}
+
+.clubdata-match .clubdata-match-field span {
+  background-image: linear-gradient(45deg, #006a00 0%, #4ea660 50%, #006a00 100%);
+  display: inline-block;
+  text-align: center;
+  padding: 0 5px;
+}
+
+.clubdata-match-time, .clubdata-match-dressroom, .clubdata-match-field, .clubdata-match-state {
+	text-align: center;	
+}
+
+.clubdata-match-dressroom {
+	/* background-image: url("../images/changingrooms-icon.jpg"); */
+	background-repeat: no-repeat;
+	background-size: 20px;
+	background-position: left; 
+	border-right: 1px solid purple;
+	border-left: 1px solid purple;
+	margin: 0 5px;	
+}
+
+.clubdata-match-dressroom-referee {
+	color: black;
+}
+
+.clubdata-match-cancelled {
+	color: red;
+	text-decoration-line: line-through;
+}
+
+.clubdata-match-cancelled .clubdata-match-state {
+	display: inline-block;
+	text-decoration: initial;
+	color: red;
+	border-radius: 5px;
+	border: 1px solid red;
+	background-color: white;
+	margin-left: 8px;
+	padding: 0 5px;	
+}
+
+.clubdata-clubcancellations .clubdata-match-cancelled {
+	text-decoration-line: initial; 
+}
+
+.clubdata-match-cancellation {
+	display: inline-block;
+	text-decoration: initial;
+	color: red;
+	border-radius: 5px;
+	border: 1px solid red;
+	background-color: white;
+	margin-left: 8px;
+	padding: 0 5px;	
+}
+
+/* --- Single match display --- */
+
+/* Slideshow container */
+.clubdata-slideshow {
+	position: relative;
+	margin: auto;
+}
+
+.clubdata-match-slide {
+	width: 80%; 
+	height:80%;
+	overflow:hidden; 
+	margin:30px auto;
+}
+
+.clubdata-match-s {
+	color: white;
+	text-align: center;
+	display: flex;
+	width: 100%;
+	margin: auto;
+}
+
+.clubdata-match-s div {
+	width: 50%;
+	margin:auto;
+	display: block;
+}
+
+div .clubdata-match-s-homeaway {
+	font-family: 'Lexend Deca', sans-serif;
+	width: 100%;
+	margin-bottom: 20px;
+}
+
+.clubdata-match-s-sep {
+	line-height: 1;
+}
+
+.clubdata-match-s-homeaway h3, .clubdata-match-s-home h3, .clubdata-match-s-away h3 {
+	font-weight: 400;
+	font-size: 2.0em;
+	word-spacing: 0;
+	letter-spacing: 0;
+	margin:0;
+	width: 100%;
+	text-align: center;
+	display: block;
+}
+
+.clubdata-match-s-home, .clubdata-match-s-dressroom {
+}
+
+.clubdata-match-s-home {
+	background:rgba(255,255,255,0.3) ;
+	border-radius: 5px;
+	padding: 0 20px;
+	font-size: 1.2em;
+	color: white;	
+}
+
+.clubdata-match-s-away {
+	background:rgba(120,120,255,0.5) ; 
+	border-radius: 5px;
+	padding: 0 20px;
+	font-size: 1.2em;
+	color: white;	
+}
+
+.clubdata-match-s-cancelled {
+	color: red;
+	text-decoration-line: line-through;
+}
+
+.clubdata-match-s-hdr {
+	padding: 0 5% 0 0;
+	text-align: right;
+	color: lightgoldenrodyellow;	
+	font-family: 'Permanent Marker', cursive;
+	font-size: 1.1em;
+}
+
+.clubdata-match-s-value{
+	padding: 0 5% 0 0;
+	text-align: left;
+	color: white;	
+	font-family: 'Lexend Deca', sans-serif;
+	font-size: 1.1em;
+}
+
+.clubdata-match-s-date{
+	
+}
+
+.clubdata-match-s-time {
+}
+
+.clubdata-match-s-field {
+}
+
+.clubdata-match-s-referee {
+}
+
+.clubdata-match-s-state {
+}
+
+
+.clubdata-match-s-home {
+    transform: translateX(-100%);
+    -webkit-transform: translateX(-100%);
+}
+
+.slide-fromleft {
+    animation: slide-fromleft 0.5s forwards;
+    -webkit-animation: slide-fromleft 0.5s forwards;
+}
+
+.slide-fromright {
+    animation: slide-fromright 0.5s forwards;
+    -webkit-animation: slide-fromright 0.5s forwards;
+}
+    
+@keyframes slide-fromleft {
+    100% { transform: translateX(0%); }
+}
+
+@-webkit-keyframes slide-fromleft {
+    100% { -webkit-transform: translateX(0%); }
+}
+    
+@keyframes slide-fromright {
+    0% { transform: translateX(100%); }
+    100% { transform: translateX(0%); }
+}
+
+@-webkit-keyframes slide-fromright {
+    0% { -webkit-transform: translateX(100%); }
+    100% { -webkit-transform: translateX(0%); }
+}
+
+
+/* Slider with dots */
+
+/* Caption text */
+.text {
+  color: #f2f2f2;
+  font-size: 15px;
+  padding: 8px 12px;
+  position: absolute;
+  bottom: 8px;
+  width: 100%;
+  text-align: center;
+}
+
+/* Number text (1/3 etc) */
+.numbertext {
+  color: #f2f2f2;
+  font-size: 12px;
+  padding: 8px 12px;
+  position: absolute;
+  top: 0;
+}
+
+/* The dots/bullets/indicators */
+.dot {
+  height: 15px;
+  width: 15px;
+  margin: 0 2px;
+  background-color: #bbb;
+  border-radius: 50%;
+  display: inline-block;
+  transition: background-color 0.6s ease;
+}
+
+.active {
+  background-color: #717171;
+}
+
+/* Fading animation */
+.fade {
+  -webkit-animation-name: fade;
+  -webkit-animation-duration: 1.5s;
+  animation-name: fade;
+  animation-duration: 1.5s;
+}
+
+@-webkit-keyframes fade {
+  from {opacity: .4} 
+  to {opacity: 1}
+}
+
+@keyframes fade {
+  from {opacity: .4} 
+  to {opacity: 1}
+}
+
+/* On smaller screens, decrease text size */
+@media only screen and (max-width: 300px) {
+  .text {font-size: 11px}
+}
+
+
+
+
+
+
+
+
+/* @todo: TO BE IMPLEMENTED */
+
+
+
+
+
+
 
 /*  TEAM */
 
@@ -130,142 +587,12 @@
 }
 
 .clubdata-ranking-points-deducted:before { 
-   	content: "(";
+	content: "(";
 }
 
 .clubdata-ranking-points-deducted:after { 
    	content: ")";
 }
-
-
-/*  SCHEDULE, RESULTS */
-
-.clubdata-infotext {
-	font-size: smaller;
-	padding: 0 0 0 10px;
-}
-
-.tab-pane  {
-	overflow: auto;	
-}
-
-.clubdata-match div {
-	display: table-cell;
-	/* border: 1px solid blue; */
-}
-
-.clubdata-match-date,
-.clubdata-match-time,
-.clubdata-match-title,
-.clubdata-match-result {
-	min-width: 14px;
-	padding: 1px 4px;
-}
-
-.colspan{
-	max-width:1px; 
-	overflow:visible;
-	white-space: nowrap;
-}
-
-.clubdata-match-name, .clubdata-match-home, .clubdata-match-away {
-}
-
-.clubdata-match-time {
-	color: blue;
-}
-
-.clubdata-match-home {
-	color: purple;	
-}
-
-.clubdata-match-away {
-	color: brown;	
-}
-
-.clubdata-match-field {
-	color: darkgreen;
-}
-
-.clubdata-match-referee {
-	color: black;	
-}
-
-.clubdata-match-state {
-	color: blue;
-}
-
-.clubdata-match .clubdata-match-field {
-	text-decoration: underline;
-}
-
-.clubdata-header div{
-	/* text-align: left; */
-}
-
-.clubdata-match-dressroom span {
-  background: #cccccc;
-  border-radius: 0.8em;
-  -moz-border-radius: 0.8em;
-  -webkit-border-radius: 0.8em;
-  display: inline-block;
-  font-weight: bold;
-  line-height: 1.6em;
-  margin-right: 5px;
-  text-align: center;
-  width: 1.6em; 
-}
-
-.clubdata-match-time, .clubdata-match-dressroom, .clubdata-match-field, .clubdata-match-state {
-	text-align: center;	
-}
-
-.clubdata-match-dressroom {
-	/* background-image: url("../images/changingrooms-icon.jpg"); */
-	background-repeat: no-repeat;
-	background-size: 20px;
-	background-position: left; 
-	border-right: 1px solid purple;
-	border-left: 1px solid purple;
-	margin: 0 5px;	
-}
-
-.clubdata-match-cancelled {
-	color: red;
-	text-decoration-line: line-through;
-}
-
-.clubdata-match-cancelled .clubdata-match-state {
-	display: inline-block;
-	text-decoration: initial;
-	color: red;
-	border-radius: 5px;
-	border: 1px solid red;
-	background-color: white;
-	margin-left: 8px;
-	padding: 0 5px;	
-}
-
-.clubdata-schedule .popover {
-    max-width: 600px;
-    width: auto;
-}
-
-.clubdata-clubcancellations .clubdata-match-cancelled {
-	text-decoration-line: initial; 
-}
-
-.clubdata-match-cancellation {
-	display: inline-block;
-	text-decoration: initial;
-	color: red;
-	border-radius: 5px;
-	border: 1px solid red;
-	background-color: white;
-	margin-left: 8px;
-	padding: 0 5px;	
-}
-
 
 
 /*  PLAYERS */
@@ -448,4 +775,5 @@ h3.clubdata-commission-members {
 	width: 200px;
 	height: auto;	
 }
+
 

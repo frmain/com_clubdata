@@ -18,6 +18,7 @@ jimport('joomla.application.component.helper');
 use SportlinkClubData\ClubData;
 use SportlinkClubData\Club;
 use SportlinkClubData\Team;
+use SportlinkClubData\ClubAddress;
 
 
 /**
@@ -36,6 +37,11 @@ class ClubDataModelBase extends JModelLegacy
 	 * @var Club
 	 */
 	protected $club;
+	
+	/**
+	 * @var ClubAddress
+	 */
+	protected $accommodation;
 	
 	/**
 	 * @var Team[]
@@ -68,6 +74,18 @@ class ClubDataModelBase extends JModelLegacy
 	{
         $this->club = $this->sportlink->getClub();
     	return $this->club;
+	}
+	
+	/**
+	 * Get the Accommation of the club (Visiting Address)
+	 *
+	 * @return ClubAddress  The visiting address (accommodation)
+	 */
+	
+	public function getAccommodation()
+	{
+		$this->accommodation = $this->sportlink->getClub()->getVisitingAddress();
+		return $this->accommodation;
 	}
 	
 	/**

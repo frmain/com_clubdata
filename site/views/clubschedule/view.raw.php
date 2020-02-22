@@ -11,10 +11,14 @@ class ClubDataViewClubSchedule extends JViewLegacy
 {
 
 	/**
+	 * @var SportlinkClubData\ClubAddress
+	 */
+	protected $accommodotion;
+	
+	/**
 	 * @var SportlinkClubData\ClubMatch[]
 	 */
 	protected $clubschedule;
-	
 	
 	/**
 	 * @var array
@@ -35,8 +39,9 @@ class ClubDataViewClubSchedule extends JViewLegacy
 	function display($tpl = null)
 	{
 		try {
-		    $this->clubschedule = $this->get('NextWeekSchedule');
-    		$this->schedulescope = $this->get('ScheduleScope');
+			$this->accommodation = $this->get('Accommodation');
+			$this->clubschedule = $this->get('NextWeekSchedule');
+		    $this->schedulescope = $this->get('ScheduleScope');
 		} catch (Exception $e) {
 		    JLog::add($e->getMessage(), JLog::ERROR, 'com_clubdata');
 		    if ($e->getCode() == 0) {
