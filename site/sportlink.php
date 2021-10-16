@@ -25,7 +25,7 @@ class Sportlink {
     
     private function __construct($key) {
 
-        parent::__construct();
+        # parent::__construct();
     }
     
     

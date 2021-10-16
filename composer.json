@@ -10,7 +10,7 @@
 	},
 	"name" : "bruseboys/com_clubdata",
 	"description" : "joomla component com_clubdata",
-	"version" : "0.1.1",
+	"version" : "0.1.3",
 	"license" : "MIT",
 	"authors" : [{
 			"name" : "Foeke Roukema",
@@ -24,5 +24,6 @@
 	},
 	"require-dev" : {
 		"phing/phing" : "~2"
-	}
+	},
+	"minimum-stability" : "stable"
 }

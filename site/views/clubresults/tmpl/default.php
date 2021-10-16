@@ -39,9 +39,9 @@ else
 		<div class="clubdata-match-date"><?php echo (new JDate($match->wedstrijddatum->format('Y-m-d')))->format('j M'); ?></div>
 		<div class="clubdata-match-home"><?php echo $match->thuisteam ?></div>
 		<div class="clubdata-match-away"><?php echo $match->uitteam ?></div>
-		<?php if (!empty($match->uitslag)) {?>
+		<?php if (!empty($match->uitslag)) { ?>
 		<div class="clubdata-match-result"><?php echo $match->uitslag ?></div>
-		<?php } else {?>
+		<?php } else { ?>
 		<div class="clubdata-match-state"><?php echo $match->status ?></div>
 		<?php } ?>
 	</div>
