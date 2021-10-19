@@ -23,12 +23,7 @@ class Sportlink {
     
     static private $instances = array();
     
-    private function __construct($key) {
-
-        # parent::__construct();
-    }
-    
-    
+  
     public static function getInstance($key) {
         if(!array_key_exists($key, self::$instances)) {
             self::$instances[$key] = new ClubData($key);

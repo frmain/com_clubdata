@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <extension type="component" version="3.3.0" method="upgrade">
     <name>com_clubdata</name>
-    <version>0.3.14</version>
-    <creationDate>2020-02-01</creationDate>
+    <version>0.3.16</version>
+    <creationDate>2021-10-19</creationDate>
     <author>Foeke Roukema</author>
     <authorEmail>webmaster@bruseboys.nl</authorEmail>
-    <authorUrl>http://www.bruseboys.nl</authorUrl>
+    <authorUrl>https://www.bruseboys.nl</authorUrl>
     <copyright>Copyright (C) 2017-19 vv Bruse Boys. All rights reserved.</copyright>
     <license>http://www.gnu.org/licenses/gpl-2.0.html GNU/GPL</license>
     <description>COM_CLUBDATA_DESCRIPTION</description>

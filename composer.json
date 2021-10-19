@@ -5,7 +5,8 @@
 	},
 	"autoload" : {
 		"psr-4" : {
-			"Bruseboys\\Com_clubdata\\" : "src"
+			"Bruseboys\\Com_clubdata\\" : "src",
+			"sportlinkclubdata\\" : "bruseboys/sportlinkclubdata/src"
 		}
 	},
 	"name" : "bruseboys/com_clubdata",
@@ -20,10 +21,18 @@
 		}
 	],
 	"require" : {
-		"bruseboys/sportlinkclubdata" : "*"
+		"bruseboys/sportlinkclubdata" : "~0"
 	},
 	"require-dev" : {
 		"phing/phing" : "~2"
 	},
-	"minimum-stability" : "stable"
+	"minimum-stability" : "dev",
+	"repositories" : [{
+			"type" : "path",
+			"url" : "../sportlinkclubdata",
+			"options" : {
+				"symlink" : false
+			}
+		}
+	]
 }
