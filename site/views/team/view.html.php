@@ -4,7 +4,6 @@
 defined('_JEXEC') or die('Restricted access');
 
 
-
 /**
  * HTML View class for the ClubData Component
  */
@@ -21,7 +20,7 @@ class ClubDataViewTeam extends JViewLegacy
 	{
 		// Assign data to the view
         try {
-    	    $this->club = $this->get('Club');
+        	$this->club = $this->get('Club');
     		$this->teams = $this->get('Teams');
     		$this->team = $this->get('Team');
     		$this->leagues = $this->get('TeamLeagues');
@@ -29,11 +28,11 @@ class ClubDataViewTeam extends JViewLegacy
     		$this->leagueranking = $this->get('LeagueRanking');
     		$this->periodsranking = $this->get('PeriodsRanking');
     		/**
-    		 * @var TeamPlayer[] $players
+    		 * @var SportlinkClubData\TeamPlayer[] $players
     		 */
     		$this->players = $this->get('PlayersOnly');
     		/**
-    		 * @var TeamPlayer[] $staff
+    		 * @var SportlinkClubData\TeamPlayer[] $staff
     		 */
     		$this->staff = $this->get('StaffOnly');
 

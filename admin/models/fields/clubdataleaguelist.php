@@ -12,7 +12,7 @@ defined('JPATH_BASE') or die;
 
 require_once JPATH_ADMINISTRATOR . '/components/com_clubdata/vendor/autoload.php';
 
-use SportlinkClubData\ClubData;
+use SportlinkClubData\ClubsManager;
 
 jimport('joomla.html.html');
 jimport('joomla.form.formfield');
@@ -33,9 +33,9 @@ class JFormFieldClubDataLeaguelist extends JFormFieldList
 	protected $type = 'ClubDataLeaguelist';
 	
 	/**
-	 * @var ClubData
+	 * @var ClubsManager
 	 */
-	protected $sportlink;
+	protected $clubsmanager;
 	
 	/**
 	 * {@inheritDoc}
@@ -50,14 +50,13 @@ class JFormFieldClubDataLeaguelist extends JFormFieldList
 		
 		$key = JComponentHelper::getParams('com_clubdata')->get('clientid');
 
-		$this->sportlink = new ClubData($key);
-
-		// Initialize the club
-		$club = $this->sportlink->getClub();
-
+		$keys = preg_split('/[\ \n\,]+/', $key);
+		
+		$this->clubsmanager = new ClubsManager($keys);
+		
     	$options = array();
 
-        foreach ($this->sportlink->getTeams() as $team) {
+    	foreach ($this->clubsmanager->getTeams() as $team) {
             foreach ($team->getLeagues() as $league) {
                 /**
     			 * @var string $opt

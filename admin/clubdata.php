@@ -3,7 +3,7 @@
  * @package     Joomla.Administrator
  * @subpackage  com_clubdata
  *
- * @copyright   Copyright (C) 2017 vv Bruse Boys. All rights reserved.
+ * @copyright   Copyright (C) 2017-2021 vv Bruse Boys. All rights reserved.
  * @license     GNU General Public License version 2 or later; see LICENSE.txt
  */
  

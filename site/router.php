@@ -7,6 +7,7 @@
 defined('_JEXEC') or die;
 
 use Joomla\CMS\Component\Router\RouterView;
+use Joomla\CMS\Component\Router\RouterInterface;
 use Joomla\CMS\Component\Router\RouterViewConfiguration;
 use Joomla\CMS\Component\Router\Rules\MenuRules;
 use Joomla\CMS\Component\Router\Rules\StandardRules;
@@ -22,89 +23,182 @@ JModelLegacy::addIncludePath(JPATH_SITE . '/components/com_clubdata/models', 'Cl
  */
 class ClubDataRouter extends RouterView
 {
-    protected $noIDs = false;
-    
-    protected $teams = array();
-    
-    /**
-     * ClubData Component router constructor
-     *
-     * @param   JApplicationCms  $app   The application object
-     * @param   JMenu            $menu  The menu object to work with
-     */
-    public function __construct($app = null, $menu = null)
-    {
-        $params = JComponentHelper::getParams('com_clubdata');
-        $this->noIDs = (bool) $params->get('sef_ids');
-        
-        $team = new RouterViewconfiguration('team');
-        $team->setKey('teamcode');
-        $this->registerView($team);
+	protected $noIDs = false;
+	
+	protected $clubs = array();
+	protected $teams = array();
+	
+	/**
+	 * ClubData Component router constructor
+	 *
+	 * @param   JApplicationCms  $app   The application object
+	 * @param   JMenu            $menu  The menu object to work with
+	 */
+	public function __construct($app = null, $menu = null)
+	{
+		$params = JComponentHelper::getParams('com_clubdata');
+		$this->noIDs = (bool) $params->get('sef_ids');
+		
+		$club = new RouterViewconfiguration('club');
+		$this->registerView($club);
+		
+		$clubstatic = new RouterViewconfiguration('clubstatic');
+		$clubstatic->setKey('clubindex');
+		$this->registerView($clubstatic);
+		
+		$team = new RouterViewconfiguration('team');
+		$team->setKey('teamcode')->setParent($clubstatic, 'clubindex');
+		$this->registerView($team);
 
-        parent::__construct($app, $menu);
-        
-        $this->attachRule(new MenuRules($this));
-        
-        /* @todo  implement/test sef_advanced*/
-        if ($params->get('sef_advanced', 0))
-        {
-            $this->attachRule(new StandardRules($this));
-            $this->attachRule(new NomenuRules($this));
-        }
-        
-        $basemodel = JModelLegacy::getInstance('Base', 'ClubDataModel');
-        if ($basemodel) $this->teams = $basemodel->getTeams();
-        
-    }
-    
-    
-    /**
-     * Method to get the segment(s) for a team
-     *
-     * @param   string  $id     teamcode of the team to retrieve the segments for
-     * @param   array   $query  The request that is built right now
-     *
-     * @return  array|string  The segments of this item
-     */
-    public function getTeamSegment($id, $query)
-    {
+		parent::__construct($app, $menu);
+		
+		$this->attachRule(new MenuRules($this));
+		
+		/* @todo  implement/test sef_advanced*/
+		if ($params->get('sef_advanced', 0))
+		{
+			$this->attachRule(new StandardRules($this));
+			$this->attachRule(new NomenuRules($this));
+		}
+		
+		$basemodel = JModelLegacy::getInstance('Base', 'ClubDataModel');
+		if ($basemodel) { 
+			$this->clubs = $basemodel->getClubs();
+			$this->teams = $basemodel->getClubTeams();
+		}
+		
+	}
+	
 
-        if (!strpos($id, ':'))
-        {
-            if (key_exists($id, $this->teams))
-                $id .= ':' . $this->teams[$id]->teamnaam;
-        }
-        
-        if ($this->noIDs)
-        {
-            list($void, $segment) = array_pad(explode(':', $id, 2), 2, null);
-            
-            return array($void => $segment);
-        }
+	/**
+	 * try to find a clubindex for a team in teams array
+	 * @return integer   index of the club within the list of clubmanagers
+	 */
+	public function findClubindex($teamcode)
+	{
+		foreach($this->teams as $clubindex=>$teams) {
+			if (key_exists($teamcode, $teams))
+				return $clubindex;
+		}
+		# when not found
+		return -1;
+	}
 
-        return array((int) $id => $id);
-    }
+	/**
+	 * Method to get the segment(s) for a team
+	 *
+	 * @param   string  $id     teamcode of the team to retrieve the segments for
+	 * @param   array   $query  The request that is built right now
+	 *
+	 * @return  array|string  The segments of this item
+	 */
+	public function getTeamSegment($id, $query)
+	{
 
-    /**
-     * Method to get the segment(s) for a team
-     *
-     * @param   string  $segment  Segment of the contact to retrieve the Teamcode for
-     * @param   array   $query    The request that is parsed right now
-     *
-     * @return  mixed   The id of this item or false
-     */
-    public function getTeamId($segment, $query)
-    {
-        if ($this->noIDs)
-        {
-            return (int) array_search($segment, $this->teams);
-        }
+		if (!strpos($id, ':'))
+		{
+			# try to find a clubindex when not provided
+			if (empty($query["clubindex"])) {
+				$clubindex = $this->findClubindex($id);
+			} else {
+				$clubindex = $query["clubindex"];
+			}
+			if (key_exists($id, $this->teams[$clubindex]))
+				$id .= ':' . $this->teams[$clubindex][$id]->teamnaam_full;
+		}
+		
+		if ($this->noIDs)
+		{
+			list($void, $segment) = array_pad(explode(':', $id, 2), 2, null);
+			
+			return array($void => $segment);
+		}
 
-        return (int) $segment;
-    }
-    
-    
+		return array((int) $id => $id);
+	}
+
+	/**
+	 * Method to get the id for a team
+	 *
+	 * @param   string  $segment  Segment of the contact to retrieve the Teamcode for
+	 * @param   array   $query    The request that is parsed right now
+	 *
+	 * @return  mixed   The id of this item or false
+	 */
+	public function getTeamId($segment, $query)
+	{
+		if ($this->noIDs)
+		{
+			return (int) array_search($segment, $this->teams);
+		}
+
+		return (int) $segment;
+	}
+
+	/**
+	 * Method to get the segment(s) for a club
+	 *
+	 * Clubstatic is the view where we do this for.
+	 * 
+	 * @param   string  $id     clubmanagerindex of the club to retrieve the segments for
+	 * @param   array   $query  The request that is built right now
+	 *
+	 * @return  array|string  The segments of this item
+	 */
+	public function getClubstaticSegment($index, $query)
+	{
+		
+		if (!strpos($index, ':'))
+		{
+			if (key_exists($index, $this->clubs))
+				$index .= ':' . $this->clubs[$index]->clubnaam;
+		}
+		
+		if ($this->noIDs)
+		{
+			list($void, $segment) = array_pad(explode(':', $index, 2), 2, null);
+			
+			return array($void => $segment);
+		}
+		
+		return array((int) $index => $index);
+	}
+	
+	/**
+	 * Method to get the index for a club
+	 *
+	 * @param   string  $segment  Segment of the contact to retrieve the Teamcode for
+	 * @param   array   $query    The request that is parsed right now
+	 *
+	 * @return  mixed   The indexnr of this item or false
+	 */
+	public function getClubstaticId($segment, $query)
+	{
+		if ($this->noIDs)
+		{
+			return (int) array_search($segment, $this->clubs);
+		}
+		
+		return (int) $segment;
+	}
+	
+
+/* These function build en parse can be overridden
+
+	public function build(&$query)
+	{
+	}
+
+	public function parse(&$segments)
+	{
+	}
+*/
+	
 }
+
+
+
+/* THESE FUNCTIONS ARE FOR OLD JOOMLA VERSIONS, MIGHT BE DELETED IN FUTURE */
 
 /**
  * ClubData router functions

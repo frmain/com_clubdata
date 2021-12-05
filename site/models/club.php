@@ -65,7 +65,7 @@ class ClubDataModelClub extends ClubDataModelBase
 	public function getClubSchedule($daysahead=8, $home=true, $away=true)
 	{
         $this->schedulescope = array("home"=>$home, "away" => $away, "daysahead" => $daysahead);
-        $this->nextweekschedule = $this->sportlink->getSchedule($daysahead, null, null, true, "datum", null, $home, $away);
+        $this->nextweekschedule = $this->clubsmanager->getSchedule($daysahead, null, null, true, "datum", null, $home, $away);
 	    return $this->nextweekschedule;
 	}
 	
@@ -99,7 +99,7 @@ class ClubDataModelClub extends ClubDataModelBase
 	public function getClubResults($daysback=7)
 	{
    	    $this->schedulescope = array("daysback" => $daysback);
-   	    $this->lastweekresults = $this->sportlink->getResults($daysback, floor($daysback/7)*-1, null, null, true, "datum-team-tijd-omgekeerd");
+   	    $this->lastweekresults = $this->clubsmanager->getResults($daysback, floor($daysback/7)*-1, null, null, true, "datum-team-tijd-omgekeerd");
         return $this->lastweekresults;
 	}
 	
@@ -112,7 +112,7 @@ class ClubDataModelClub extends ClubDataModelBase
 	{
 	    if (!isset($this->cancellations))
 	    {
-           $this->cancellations = $this->sportlink->getCancellations();
+	    	$this->cancellations = $this->clubsmanager->getCancellations();
 	    }
 	    return $this->cancellations;
 	}

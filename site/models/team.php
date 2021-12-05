@@ -35,6 +35,11 @@ class ClubDataModelTeam extends ClubDataModelBase
 	private $teamcode = null;
 	
 	/**
+	 * @var integer
+	 */
+	private $clubindex = null;
+	
+	/**
 	 * @var Team 
 	 */
 	protected $team;
@@ -87,8 +92,12 @@ class ClubDataModelTeam extends ClubDataModelBase
 		{
 			$app = JFactory::getApplication();
 			$this->teamcode = $app->input->get('teamcode',null);
+			$this->clubindex = $app->input->get('clubindex',-1);
+			if (! $this->clubsmanager->getClubManager($this->clubindex)) {
+				throw new Exception(JText::sprintf('COM_CLUBDATA_CLUB_NOTFOUND', $this->clubindex), 404);
+			}
 			try {
-				$this->team = new Team($this->sportlink, $this->teamcode,-1, array(), true);
+				$this->team = new Team($this->clubsmanager->getClubManager($this->clubindex)->getDataManager(), $this->teamcode,-1, array(), true);
 			} catch (InvalidResponseException $e) {
 				throw new Exception(JText::sprintf('COM_CLUBDATA_TEAM_NOTFOUND', $this->teamcode), 404);
 			}

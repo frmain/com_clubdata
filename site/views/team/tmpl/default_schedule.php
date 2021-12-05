@@ -12,11 +12,13 @@ defined('_JEXEC') or die('Restricted access');
 
 $app = JFactory::getApplication();
 $teamcode=$app->input->getVar('teamcode');
-$league=$app->input->getvar('league');
+$league=$app->input->getVar('league');
+$clubindex=$app->input->getVar('clubindex');
 
 $link = new JUri(JRoute::_(JUri::base().'index.php?option=com_clubdata&task=display&format=raw', false));
 $link->setVar('teamcode', $teamcode);
 $link->setVar('league', $league);
+$link->setVar('clubindex', $clubindex);
 
 ?>
 <h2><?php echo JText::_('COM_CLUBDATA_SCHEDULE_TITLE'); ?></h2>

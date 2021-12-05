@@ -15,7 +15,7 @@ require_once JPATH_SITE . '/components/com_clubdata/sportlink.php';
 
 jimport('joomla.application.component.helper');
 
-use SportlinkClubData\ClubData;
+use SportlinkClubData\ClubsManager;
 use SportlinkClubData\Club;
 use SportlinkClubData\Team;
 use SportlinkClubData\ClubAddress;
@@ -29,9 +29,9 @@ class ClubDataModelBase extends JModelLegacy
 {
 	
 	/**
-	 * @var ClubData $sportlink
+	 * @var ClubsManager clubsmanager
 	 */
-	protected $sportlink;
+	protected $clubsmanager;
 	
 	/**
 	 * @var Club
@@ -49,6 +49,11 @@ class ClubDataModelBase extends JModelLegacy
 	protected $teams;
 	
 	/**
+	 * @var Team[][] teams per club
+	 */
+	protected $clubteams = [];
+	
+	/**
 	 * @var array
 	 */
 	protected $warning=[];
@@ -58,10 +63,15 @@ class ClubDataModelBase extends JModelLegacy
 		parent::__construct($config);
 		
 		/**
-		 * @var string $key
+		 * @var string $key  key is a (comma or whitespace) separated list with client-ids
 		 */
 		$key = JComponentHelper::getParams('com_clubdata')->get('clientid');
-        $this->sportlink = Sportlink::getInstance($key);
+
+		$keys = preg_split('/[\ \n\,]+/', $key);
+		$key = join(",",$keys);
+		
+		# $this->clubsmanager = new ClubsManager($keys);		
+		$this->clubsmanager = Sportlink::getInstance($key);
 	}
 	
 	/**
@@ -69,10 +79,9 @@ class ClubDataModelBase extends JModelLegacy
 	 *
 	 * @return Club  The club object
 	 */
-
 	public function getClub()
 	{
-        $this->club = $this->sportlink->getClub();
+		$this->club = $this->clubsmanager->getMainClub();
     	return $this->club;
 	}
 	
@@ -84,18 +93,40 @@ class ClubDataModelBase extends JModelLegacy
 	
 	public function getAccommodation()
 	{
-		$this->accommodation = $this->sportlink->getClub()->getVisitingAddress();
+		$this->accommodation = $this->clubsmanager->getMainClub()->getVisitingAddress();
 		return $this->accommodation;
 	}
 	
 	/**
-	 * Get the teams of the club
+	 * Get the teams of all clubs in subscription
 	 * @return  SportlinkClubData\Team[]  list of clubteams
 	 */
 	public function getTeams()
 	{
-        $this->teams = $this->sportlink->getTeams();
-    	return $this->teams;
+		$this->teams = $this->clubsmanager->getTeams();
+		return $this->teams;
+	}
+	
+	/**
+	 * Get the clubs of the subscription
+	 * @return  SportlinkClubData\Club[]  list of clubs
+	 */
+	public function getClubs()
+	{
+		$this->clubs = $this->clubsmanager->getClubs();
+		return $this->clubs;
+	}
+	
+	/**
+	 * Get the teams of the club
+	 * @return  SportlinkClubData\Team[][]  list of teams per club
+	 */
+	public function getClubTeams()
+	{
+		foreach($this->clubsmanager->getClubManagers() as $clubmgr) {
+			$this->clubteams[]=$clubmgr->getTeams();
+		}
+		return $this->clubteams;
 	}
 	
 	/**

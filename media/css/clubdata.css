@@ -7,7 +7,7 @@
  */
 
 
-.clubdatateamdata, .clubdataleagues, .clubdataplayers, .clubdatastaff, .clubdataranking, .clubdataschedule, .clubdataresults, .clubdatacommissions {
+.clubdataclubstatic, .clubdataclubteams, .clubdatateamdata, .clubdataleagues, .clubdataplayers, .clubdatastaff, .clubdataranking, .clubdataschedule, .clubdataresults, .clubdatacommissions {
 }
 
 
@@ -38,13 +38,13 @@
 }
 
 .clubdata-results, .clubdata-schedule, .clubdata-ranking, .clubdata-players, .clubdata-leagues, .clubdata-clubschedule, 
-.clubdata-clubresults, .clubdata-clubcancellations, .clubdata-commission-members {
+.clubdata-clubresults, .clubdata-clubcancellations, .clubdata-commission-members, .clubdata-clubstatic, .clubdata-teams {
 	display: table;
 	width: 99%;
 	border-collapse: collapse;
 }
 
-.clubdata-match, .clubdata-rank, .clubdata-player, .clubdata-league, .clubdata-crosstable {
+.clubdata-match, .clubdata-rank, .clubdata-player, .clubdata-league, .clubdata-crosstable, .clubdata-line {
 	display: table-row;
 	height: 30px;
 }
@@ -74,8 +74,8 @@
 	margin: 15px 0;
 }
 	
-.clubdata-match:nth-child(even), .clubdata-rank:nth-child(even), .clubdata-player:nth-child(even), .clubdata-league:nth-child(even) {background: #efefef;}
-.clubdata-match:nth-child(odd), .clubdata-rank:nth-child(odd), .clubdata-player:nth-child(odd), .clubdata-league:nth-child(odd) {background: #fff;}
+.clubdata-match:nth-child(even), .clubdata-rank:nth-child(even), .clubdata-player:nth-child(even), .clubdata-league:nth-child(even), .clubdata-line:nth-child(even) {background: #efefef;}
+.clubdata-match:nth-child(odd), .clubdata-rank:nth-child(odd), .clubdata-player:nth-child(odd), .clubdata-league:nth-child(odd), .clubdata-line:nth-child(odd) {background: #fff;}
 
 .clubdata-favourite {
 	border-style: dotted; 
@@ -248,16 +248,16 @@
 }
 
 .clubdata-crosstable-awayteam .vertical {
-    -webkit-transform:rotate(-90deg);
-    -moz-transform:rotate(-90deg);
-    -o-transform: rotate(-90deg);
-    -ms-transform:rotate(-90deg);
-    transform: rotate(-90deg);
-    white-space:nowrap;
-    cursor: vertical-text;
-    width: 12px;
+	-webkit-transform:rotate(-90deg);
+	-moz-transform:rotate(-90deg);
+	-o-transform: rotate(-90deg);
+	-ms-transform:rotate(-90deg);
+	transform: rotate(-90deg);
+	white-space:nowrap;
+	cursor: vertical-text;
+	width: 12px;
 	display: block;
-    /* writing-mode: sideways-lr; not supported in all browsers */
+	/* writing-mode: sideways-lr; not supported in all browsers */
 }
 
 .clubdata-crosstable-title {
@@ -454,3 +454,48 @@ h3.clubdata-commission-members {
 	height: auto;	
 }
 
+/*  CLUBSTATIC */
+
+.clubdata-line div {
+	display: table-cell;
+}
+
+.clubdata-static-label {
+	
+}
+
+.clubdata-static-value {
+	font-weight: bold;	
+}
+
+.clubdata-logo {
+	width: 80px;
+	height: auto;
+}
+
+.clubdata-other-club {
+	float: right;
+	clear: both;
+}
+
+.clubdata-clubstatic:after {
+	content: "";
+	clear: both;
+}
+
+
+.clubdatateam .col-md-6 {
+	padding: 0 5px;
+	overflow: hidden;
+}
+
+.clubdata-clubteam:hover {
+	color: blue;
+	cursor: pointer;
+}
+
+.clubdata-static-photo {
+	width: 120px;
+	height: auto;
+	padding: 10px;
+}

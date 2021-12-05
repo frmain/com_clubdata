@@ -30,13 +30,6 @@ class ClubDataViewClubData extends JViewLegacy
 		$this->items		= $this->get('Items');
 		$this->pagination	= $this->get('Pagination');
  
-		// Check for errors. Deprecated!
-		if (count($errors = $this->get('Errors')))
-		{
-			JError::raiseError(500, implode('<br />', $errors));
- 
-			return false;
-		}
 
 		// Set the toolbar
 		$this->addToolBar();

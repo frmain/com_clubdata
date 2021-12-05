@@ -22,15 +22,15 @@ JFormHelper::loadFieldClass('list');
 
 
 /**
- * Field to load a list of available teams from ClubDataservice
+ * Field to load a list of available clubs from ClubDataservice
  *
  */
-class JFormFieldClubDataTeamlist extends JFormFieldList
+class JFormFieldClubDataClublist extends JFormFieldList
 {
 	/**
 	 * @var string
 	 */
-	protected $type = 'ClubDataTeamlist';
+	protected $type = 'ClubDataClublist';
 	
 	/**
 	 * @var ClubsManager
@@ -55,12 +55,8 @@ class JFormFieldClubDataTeamlist extends JFormFieldList
 
 		$options = array();
 
-		foreach($this->clubsmanager->getTeams() as $team){
-			$option = JHTML::_('select.option', $team->teamcode, $team->teamnaam_full, array('option.attr' => 'optionattr'));
-
-			$option->optionattr = array(
-				'data-clubindex' => $this->clubsmanager->getClubIndex($team->getDataManager()->getKey())
-			);
+		foreach($this->clubsmanager->getClubs() as $club){
+			$option = JHTML::_('select.option', $this->clubsmanager->getClubIndex($club->getDataManager()->getKey()), $club->clubnaam);
 			$options[] = $option;
 		}
 

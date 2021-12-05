@@ -12,7 +12,7 @@ defined('_JEXEC') or die('Restricted access');
 require_once JPATH_ADMINISTRATOR . '/components/com_clubdata/vendor/autoload.php';
 
 
-use SportlinkClubData\ClubData;
+use SportlinkClubData\ClubsManager;
 
 /**
  * Sportlink class
@@ -26,7 +26,8 @@ class Sportlink {
   
     public static function getInstance($key) {
         if(!array_key_exists($key, self::$instances)) {
-            self::$instances[$key] = new ClubData($key);
+        	$keys = preg_split('/[\ \n\,]+/', $key);
+        	self::$instances[$key] = new ClubsManager($keys);
         }
         
         return self::$instances[$key];

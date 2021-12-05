@@ -25,9 +25,10 @@ $currleague = $input->get('league');
 		<div class="clubdata-league-title"><?php echo JText::_('COM_CLUBDATA_LEAGUE_CLASS'); ?></div>
 	</div>
 <?php foreach ($this->leagues as $league) { 
-    $link = new Uri('index.php?option=com_clubdata&view=team&teamcode='.$league->teamcode);
-    $link->setVar('league', $league->poulecode);
-    $link = JRoute::_($link);
+	$link = new Uri('index.php?option=com_clubdata&view=team&teamcode='.$league->teamcode);
+	$link->setVar('clubindex', $league->clubindex);
+	$link->setVar('league', $league->poulecode);
+	$link = JRoute::_($link);
 ?>
  
 	<div class="clubdata-league <?php if ($currleague == $league->poulecode) echo "clubdata-league-selected"; ?>" data-href="<?php echo $link ?>">
@@ -37,11 +38,11 @@ $currleague = $input->get('league');
 			<span class="glyphicon glyphicon-hand-right"></span><span><?php echo JText::_('COM_CLUBDATA_SELECTED'); ?>&nbsp;</span>
 		<?php 
 		} else {
-		    if (isset($league->poulecode)) { 
+			if (isset($league->poulecode)) { 
 		?>
 			<a href="<?php echo $link ?>" class="btn btn-default btn-info"><?php echo JText::_('COM_CLUBDATA_SELECT'); ?></a>
 		<?php 
-		    } 
+			}
 		} ?>
 		</div>
 		<div class="clubdata-league-title"><?php echo $league->competitienaam ?></div>

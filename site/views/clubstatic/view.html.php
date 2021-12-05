@@ -1,16 +1,12 @@
 <?php
-
 // No direct access to this file
 defined('_JEXEC') or die('Restricted access');
-
-
-
+ 
 /**
  * HTML View class for the ClubData Component
  */
-class ClubDataViewCommissions extends JViewLegacy
+class ClubDataViewClubStatic extends JViewLegacy
 {
-
 	/**
 	 * Overriding JView display method
 	 *
@@ -21,8 +17,10 @@ class ClubDataViewCommissions extends JViewLegacy
 	{
 		// Assign data to the view
 		try {
-			$this->commissions = $this->get('Commissions');
-			$this->members = $this->get('CommissionMembers');
+			$this->club = $this->get('Club');
+			$this->visitingaddress = $this->get('ClubVisitingAddress');
+			$this->clubs = $this->get('Clubs');
+			$this->teams = $this->get('Teams');
 		} catch (Exception $e) {
 			JLog::add($e->getMessage(), JLog::ERROR, 'com_clubdata');
 			if ($e->getCode() == 0) {
@@ -32,10 +30,10 @@ class ClubDataViewCommissions extends JViewLegacy
 				throw new Exception(JText::_("COM_CLUBDATA_SPORTLINK_NOT_FOUND"), 404);
 			}
 		}
-
+			
 		!empty($this->get('Warning'))?? $this->warning[] = $this->get('Warning');
 		$this->warningmessage = empty($this->warning)?"":implode(", <br/>", $this->warning);
-
+		
 		// Display the view
 		parent::display($tpl);
 	}

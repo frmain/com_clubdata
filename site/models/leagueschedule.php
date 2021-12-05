@@ -59,8 +59,12 @@ class ClubDataModelLeagueSchedule extends ClubDataModelBase
 		{
 			$app = JFactory::getApplication();
 			$this->leagueid = $app->input->get('league',null);
+			$this->clubindex = $app->input->get('clubindex',-1);
+			if (! $this->clubsmanager->getClubManager($this->clubindex)) {
+				throw new Exception(JText::sprintf('COM_CLUBDATA_CLUB_NOTFOUND', $this->clubindex), 404);
+			}
 			try {
-				$this->league = new League($this->sportlink, $this->leagueid);
+				$this->league = new League($this->clubsmanager->getClubManager($this->clubindex)->getDataManager(), $this->leagueid);
 				//$this->league->populate();
 			} catch (Exception $e) {
 				throw new Exception(JText::sprintf('COM_CLUBDATA_LEAGUE_NOTFOUND', $this->leagueid), 404);

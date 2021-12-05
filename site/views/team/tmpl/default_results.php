@@ -11,19 +11,16 @@
 // No direct access to this file
 defined('_JEXEC') or die('Restricted access');
 
-$menu = JFactory::getApplication()->getMenu();
-$active = $menu->getActive();
-$itemid = $active->id;
-
 $app = JFactory::getApplication();
 $teamcode=$app->input->getVar('teamcode');
 $league=$app->input->getvar('league');
+$clubindex=$app->input->getVar('clubindex');
 
 $link = new JUri(JRoute::_(JUri::base().'index.php?option=com_clubdata&task=leagueresults&format=raw', false));
 $link = new JUri(JRoute::_(JUri::base().'index.php?option=com_clubdata&task=display&format=raw', false));
 $link->setVar('teamcode', $teamcode);
 $link->setVar('league', $league);
-//$link->setVar('Itemid', $itemid);
+$link->setVar('clubindex', $clubindex);
 
 ?>
 <h2><?php echo JText::_('COM_CLUBDATA_RESULTS_TITLE'); ?></h2>

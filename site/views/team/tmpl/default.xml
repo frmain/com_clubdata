@@ -17,19 +17,23 @@
 					onchange="	
 						jQuery(function($){
 							var $select = $('#jform_request_league');
-						    var ogHTML = $select.data('originalHTML');
-						    if (ogHTML == undefined) {
-							    $select.data('originalHTML', $select.html());
+							var ogHTML = $select.data('originalHTML');
+							if (ogHTML == undefined) {
+								$select.data('originalHTML', $select.html());
 							} else {
-							    $select.html(ogHTML);
+								$select.html(ogHTML);
 							}
-							
 							var whattofind = 'option:not(:contains(\''+  $('#jform_request_teamcode option:selected').text() + '\'))';
-						    var $optionsToRemove = $select.find(whattofind);
-						    whattofind = 'option[value!=\'\']';
-						    $optionsToRemove.remove('option[value!=\'\']');
-						    $select.trigger('liszt:updated');
-						}) (jQuery);"
+							var $optionsToRemove = $select.find(whattofind);
+							whattofind = 'option[value!=\'\']';
+							$optionsToRemove.remove('option[value!=\'\']');
+							$select.trigger('liszt:updated');
+							
+							var $club = $('#jform_request_clubindex');
+							var clubindex = $('#jform_request_teamcode option:selected').attr('data-clubindex');
+							$club.val(clubindex);
+							$club.trigger('liszt:updated');
+						});"
 			>
 				<option value="">COM_CLUBDATA_TEAMVIEW_FIELD_TEAMSELECT_DEFAULT_OPTION</option>
 			</field>
@@ -41,6 +45,11 @@
 			>
 				<option value="">COM_CLUBDATA_TEAMVIEW_FIELD_LEAGUESELECT_DEFAULT_OPTION</option>
 			</field>
+			<field
+					name="clubindex"
+					type="hidden"
+					default="0"
+			/>
 		</fieldset>
 	</fields>
 </metadata>

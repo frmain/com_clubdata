@@ -33,26 +33,30 @@ defined('_JEXEC') or die('Restricted access');
 	<?php } ?>
 	
 	<?php 
-    $link = 'index.php?option=com_clubdata&view=team&teamcode=';
-    foreach ($this->teams as $team) {
-        $teamOptions[] = JHTML::_('select.option', JRoute::_($link . $team->teamcode), $team->teamnaam_full, 'value', 'text');
-    }
-    
-    
-    ?>
-    <div class="clubdata-other-team">
-        <form name="teamselect" id="teamselect" method="get" action="" >
-        	<fieldset class="btn-toolbar">
-        		<div class="btn-group">
-        			<label class="clubdata-team-search-lbl" for="teamcode"><?php echo JText::_('COM_CLUBDATA_TEAM_OTHER_LABEL') . '&#160;'; ?></label>
-        			<select class="inputbox" onchange="this.form.action=this.value;this.form.submit()">
-        				<option value=""><?php echo JText::_('COM_CLUBDATA_TEAM_SELECT_DEFAULT'); ?></option>
-        				<?php echo JHtml::_('select.options', $teamOptions);?>
-        			</select>
-        		</div>
-        	</fieldset>
-        </form>
-     </div>
+	$teamoptions = array();
+	$teamoptions[] = JHTML::_('select.option', '', JText::_('COM_CLUBDATA_TEAM_SELECT_DEFAULT'));
+	foreach ($this->teams as $team) {
+		$option = JHTML::_('select.option', $team->teamcode, $team->teamnaam_full, array('option.attr' => 'optionattr'));
+		$option->optionattr = array(
+			'data-clubindex' => $team->clubindex
+		);
+		$teamoptions[] = $option;
+	}
+
+	?>
+	<div class="clubdata-other-team">
+		<form name="teamselect" id="teamselect" method="get" action="<?php echo JRoute::_("index.php?view=team"); ?>" >
+			<fieldset class="btn-toolbar">
+				<div class="btn-group">
+					<input type="hidden" name="clubindex" value="">
+					<label class="clubdata-team-search-lbl" for="team"><?php echo JText::_('COM_CLUBDATA_TEAM_OTHER_LABEL') . '&#160;'; ?></label>
+					<select id="team" name="teamcode" class="inputbox" onchange="this.form.clubindex.value=this.options[this.selectedIndex].getAttribute('data-clubindex');this.form.submit()">
+						<?php echo JHtml::_('select.options', $teamoptions, array('option.attr' => 'optionattr'));?>
+					</select>
+				</div>
+			</fieldset>
+		</form>
+	</div>
 
 	
 </div>
