@@ -101,9 +101,9 @@ class ClubDataModelBase extends JModelLegacy
 	 * Get the teams of all clubs in subscription
 	 * @return  SportlinkClubData\Team[]  list of clubteams
 	 */
-	public function getTeams()
+	public function getTeams($full=false)
 	{
-		$this->teams = $this->clubsmanager->getTeams();
+		$this->teams = $this->clubsmanager->getTeams($full);
 		return $this->teams;
 	}
 	

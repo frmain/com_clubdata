@@ -103,7 +103,7 @@ class ClubDataRouter extends RouterView
 			} else {
 				$clubindex = $query["clubindex"];
 			}
-			if (key_exists($id, $this->teams[$clubindex]))
+			if (!empty($this->teams[$clubindex]) && key_exists($id, $this->teams[$clubindex]))
 				$id .= ':' . $this->teams[$clubindex][$id]->teamnaam_full;
 		}
 		
@@ -150,7 +150,7 @@ class ClubDataRouter extends RouterView
 		
 		if (!strpos($index, ':'))
 		{
-			if (key_exists($index, $this->clubs))
+			if (!empty($this->clubs) && key_exists($index, $this->clubs))
 				$index .= ':' . $this->clubs[$index]->clubnaam;
 		}
 		
